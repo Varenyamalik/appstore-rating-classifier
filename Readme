@@ -1,0 +1,44 @@
+# App Store Rating Classifier
+
+## a. Problem statement
+Predict whether an Apple App Store app is "highly rated" (user rating of 4.0 or higher)
+from its metadata, using five classification models, and compare them with six metrics.
+Results can be explored in a deployed Streamlit app.
+
+## b. Dataset description
+- **Source:** Kaggle, Apple App Store apps dataset (AppleStore.csv and appleStore_description.csv). [add the exact Kaggle link you used]
+- **Raw size:** 7,197 apps. Apps with zero ratings were removed (an unrated app is not a poorly rated one), leaving **6,268 instances**.
+- **Target:** `highly_rated` = 1 if user_rating >= 4.0, else 0 (about 76% positive, so the classes are imbalanced).
+- **Features (14):**
+  - Numeric (12): size_mb, price, rating_count_tot, rating_count_ver, sup_devices.num, ipadSc_urls.num, lang.num, vpp_lic, desc_len, name_len, ver_major, is_free
+  - Categorical (2): cont_rating, prime_genre
+- **Engineered features:** desc_len (from the description file), name_len, ver_major, size_mb, is_free.
+- **Excluded:** user_rating_ver, because it is the rating of the current version and leaks the target.
+- **Split:** 80/20 stratified (random_state=42), 5,014 train and 1,254 test.
+- **Preprocessing:** StandardScaler for numeric, one-hot encoding for categorical, saved together with each model as one pipeline.
+
+## c. GitHub repository
+https://github.com/Varenyamalik/appstore-rating-classifier
+
+Live app: [paste your streamlit.app URL]
+
+## d. Models used
+
+| ML Model Name | Accuracy | AUC | Precision | Recall | F1 | MCC |
+|---|---|---|---|---|---|---|
+| Logistic Regression | 0.770 | 0.742 | 0.790 | 0.953 | 0.864 | 0.213 |
+| Decision Tree | 0.751 | 0.716 | 0.812 | 0.878 | 0.843 | 0.248 |
+| KNN | 0.761 | 0.651 | 0.806 | 0.905 | 0.852 | 0.245 |
+| Naive Bayes | 0.720 | 0.669 | 0.838 | 0.785 | 0.811 | 0.279 |
+| Support Vector Machine | 0.762 | 0.738 | 0.773 | 0.974 | 0.862 | 0.120 |
+
+### Observations
+
+| ML Model Name | Observation about model performance |
+|---|---|
+| Logistic Regression | [your words] |
+| Decision Tree | [your words] |
+| KNN | [your words] |
+| Naive Bayes | [your words] |
+| Support Vector Machine | [your words] |
+| **Overall winner** | [your choice and why] |
